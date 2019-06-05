@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-  <title>Current Messages</title>
-  <pre>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/master.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="author" content="David ChenFitzgerald">
+    <title>Current Messages</title>
+  </head>
+
+  <body style="text-align: center; margin: 0 auto; width: 960px; overflow: auto;">
+    <h2>TESTING</h2>
+    <div id="old_messages_container" style="border: 1px solid black; margin: 16px;">
+      <pre style="text-align: right; padding: 8px; color: blue;">
 {}
-  </pre>
-  <form method="POST" action="http://localhost:8000/">
-    <textarea name="message" rows="8" cols="80"></textarea>
-    <br />
-    <button type="submit">Send</button>
-  </form>
+      </pre>
+    </div>
+    <form method="POST" action="http://localhost:8000/">
+      <textarea name="message" rows="3" cols="40"></textarea>
+      <br />
+      <button type="submit">Send</button>
+    </form>
+  </body>
+</html>

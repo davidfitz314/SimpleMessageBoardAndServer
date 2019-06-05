@@ -1,0 +1,10 @@
+body {
+  margin: 0 auto;
+  padding: 0px;
+  width: 960px;
+  overflow: auto;
+}
+
+.old_messages_container {
+  border: 1px solid black;
+}
