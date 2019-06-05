@@ -1,7 +1,13 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
+from pathlib import Path
+
+memory = []
+
+form = Path('MessageScreen.html').read_text()
 
 class MessageServer(BaseHTTPRequestHandler):
+
     ##
     ## Sends the message data for the http headers and content,
     ## Sends a response 200 for when the data is posted.
@@ -13,19 +19,23 @@ class MessageServer(BaseHTTPRequestHandler):
         data = self.rfile.read(length).decode()
         # extract the message field from the request data
         message = parse_qs(data)["message"][0]
-        # Send the message field back as the response
-        self.send_response(200)
-        # message response data should be text and use utf-8
-        self.send_header('Content-Type', 'text/plain; charset=utf-8')
-        self.send_headers()
-        # write the message and make sure it is encoded to correct type
-        self.wfile.write(message.encode())
+        print(message)
+        # Escape HTML tags in the message so users can't break world+dog.
+        message = message.replace("<", "&lt;")
+        # Store the message in memory
+        memory.append(message)
+        # redirect via 303
+        self.send_response(303)
+        self.send_header('Location', '/')
+        self.end_headers()
 
-    ##
-    ## 
-    ##
-    ##
     def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-Type', 'text/html; charset=utf-8')
+        self.end_headers()
+        # put the response together from the form and stored Messages
+        mesg = form.format("\n".join(memory))
+        self.wfile.write(mesg.encode())
 
 
 
