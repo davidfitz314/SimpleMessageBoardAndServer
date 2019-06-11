@@ -2,8 +2,14 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
 from pathlib import Path
 import os
+import threading
+
 
 memory = []
+
+def resetMemory():
+    threading.Timer(60, resetMemory).start()
+    memory = []
 
 form = Path('MessageScreen.html').read_text()
 
@@ -46,6 +52,7 @@ class MessageServer(BaseHTTPRequestHandler):
 ## then launches the built in python server while running the 'MessageServer' methods for handling requests.
 ##
 if __name__ == '__main__':
+    resetMemory()
     port = int(os.environ.get('PORT', 8000))
     server_address = ('', port)
     httpd = HTTPServer(server_address, MessageServer)
