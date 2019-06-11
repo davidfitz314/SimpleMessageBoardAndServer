@@ -2,6 +2,14 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
 from pathlib import Path
 import os
+import threading
+from socketserver import ThreadingMixIn
+
+import threading
+from socketserver import ThreadingMixIn
+
+class ThreadHTTPServer(ThreadingMixIn, http.server.HTTPServer):
+    "HTTPServer that supports thread-based concurrency."
 
 memory = []
 
@@ -48,5 +56,5 @@ class MessageServer(BaseHTTPRequestHandler):
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))
     server_address = ('', port)
-    httpd = HTTPServer(server_address, MessageServer)
+    httpd = ThreadHTTPServer(server_address, MessageServer)
     httpd.serve_forever()
