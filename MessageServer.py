@@ -2,18 +2,12 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
 from pathlib import Path
 import os
-import threading
-from socketserver import ThreadingMixIn
-
-import threading
-from socketserver import ThreadingMixIn
 
 memory = []
 
 form = Path('MessageScreen.html').read_text()
 
-class MessageServer(ThreadingMixIn, http.server.HTTPServer):
-    ## Now allows multi threading
+class MessageServer(BaseHTTPRequestHandler):
 
     ##
     ## Sends the message data for the http headers and content,
