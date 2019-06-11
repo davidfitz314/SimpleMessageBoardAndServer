@@ -7,13 +7,14 @@ import threading
 
 memory = []
 
-def resetMemory():
-    threading.Timer(60, resetMemory).start()
-    memory = []
+
 
 form = Path('MessageScreen.html').read_text()
 
 class MessageServer(BaseHTTPRequestHandler):
+    def resetMemory(self):
+        threading.Timer(60, resetMemory).start()
+        memory = []
 
     ##
     ## Sends the message data for the http headers and content,
