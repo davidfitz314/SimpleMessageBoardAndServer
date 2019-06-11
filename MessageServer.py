@@ -2,19 +2,32 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
 from pathlib import Path
 import os
-import threading
-
+from datetime import datetime, timedelta
+from threading import Timer
 
 memory = []
+
+x=datetime.today()
+y = x.replace(day=x.day, hour=0, minute=1, second=0, microsecond=0) + timedelta(days=1)
+delta_t=y-x
+
+secs=delta_t.total_seconds()
+
+def resetMemory():
+    memory = []
+    #...
+
+t = Timer(secs, resetMemory)
+t.start()
+
+
+
 
 
 
 form = Path('MessageScreen.html').read_text()
 
 class MessageServer(BaseHTTPRequestHandler):
-    def resetMemory(self):
-        threading.Timer(60, resetMemory).start()
-        memory = []
 
     ##
     ## Sends the message data for the http headers and content,
