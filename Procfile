@@ -1,1 +1,1 @@
-web: python /SimpleMessageBoardAndServer/MessageServer.py
+web: python MessageServer.py
