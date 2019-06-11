@@ -7,18 +7,13 @@ from threading import Timer
 
 memory = []
 
-x=datetime.today()
-y = x.replace(day=x.day, hour=0, minute=1, second=0, microsecond=0) + timedelta(days=1)
-delta_t=y-x
 
-secs=delta_t.total_seconds()
 
 def resetMemory():
-    memory.clear()
+    memory.clear()z
     #...
 
-t = Timer(secs, resetMemory)
-t.start()
+
 
 
 
@@ -66,6 +61,13 @@ class MessageServer(BaseHTTPRequestHandler):
 ## then launches the built in python server while running the 'MessageServer' methods for handling requests.
 ##
 if __name__ == '__main__':
+    x=datetime.today()
+    y = x.replace(day=x.day, hour=0, minute=1, second=0, microsecond=0) + timedelta(days=1)
+    delta_t=y-x
+
+    secs=delta_t.total_seconds()
+    t = Timer(secs, resetMemory)
+    t.start()
     #resetMemory()
     port = int(os.environ.get('PORT', 8000))
     server_address = ('', port)
