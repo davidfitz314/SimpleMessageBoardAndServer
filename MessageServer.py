@@ -53,7 +53,7 @@ class MessageServer(BaseHTTPRequestHandler):
 ## then launches the built in python server while running the 'MessageServer' methods for handling requests.
 ##
 if __name__ == '__main__':
-    resetMemory()
+    #resetMemory()
     port = int(os.environ.get('PORT', 8000))
     server_address = ('', port)
     httpd = HTTPServer(server_address, MessageServer)
