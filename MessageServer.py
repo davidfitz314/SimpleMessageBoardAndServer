@@ -8,14 +8,12 @@ from socketserver import ThreadingMixIn
 import threading
 from socketserver import ThreadingMixIn
 
-class ThreadHTTPServer(ThreadingMixIn, http.server.HTTPServer):
-    "HTTPServer that supports thread-based concurrency."
-
 memory = []
 
 form = Path('MessageScreen.html').read_text()
 
-class MessageServer(BaseHTTPRequestHandler):
+class MessageServer(ThreadingMixIn, http.server.HTTPServer):
+    ## Now allows multi threading
 
     ##
     ## Sends the message data for the http headers and content,
@@ -56,5 +54,5 @@ class MessageServer(BaseHTTPRequestHandler):
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8000))
     server_address = ('', port)
-    httpd = ThreadHTTPServer(server_address, MessageServer)
+    httpd = HTTPServer(server_address, MessageServer)
     httpd.serve_forever()
