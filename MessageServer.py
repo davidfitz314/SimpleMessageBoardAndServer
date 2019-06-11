@@ -14,7 +14,7 @@ delta_t=y-x
 secs=delta_t.total_seconds()
 
 def resetMemory():
-    memory = []
+    memory.clear()
     #...
 
 t = Timer(secs, resetMemory)
