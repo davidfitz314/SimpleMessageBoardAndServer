@@ -45,6 +45,6 @@ class MessageServer(BaseHTTPRequestHandler):
 ## then launches the built in python server while running the 'MessageServer' methods for handling requests.
 ##
 if __name__ == '__main__':
-    server_address = ('', 8000)
+    server_address = ('', 80)
     httpd = HTTPServer(server_address, MessageServer)
     httpd.serve_forever()
