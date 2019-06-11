@@ -1,6 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
 from pathlib import Path
+import os
 
 memory = []
 
@@ -45,6 +46,7 @@ class MessageServer(BaseHTTPRequestHandler):
 ## then launches the built in python server while running the 'MessageServer' methods for handling requests.
 ##
 if __name__ == '__main__':
-    server_address = ('', 80)
+    port = int(os.environ.get('PORT', 8000))
+    server_address = ('', port)
     httpd = HTTPServer(server_address, MessageServer)
     httpd.serve_forever()

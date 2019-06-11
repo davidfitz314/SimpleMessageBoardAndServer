@@ -1,6 +1,6 @@
 # SimpleMessageBoardAndServer
 
-Python Server
+Python Server Hosted on Heroku
 
 Uses an HTML page with a form to send post requests to the server,
 
